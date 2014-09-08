@@ -1,6 +1,6 @@
 {
   "name": "share-access",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "Share access-control midleware",
   "main": "index.js",
   "scripts": {
