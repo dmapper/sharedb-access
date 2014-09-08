@@ -58,7 +58,7 @@ shareAccess.denyCreate('items', function(docId, doc, session, origin){
 shareAccess.allowCreate('items', function(docId, doc, session, origin){
   return session.isAdmin;
 });
-
+```
 #### Read
 
 Interface is like 'create'-operation
@@ -72,7 +72,7 @@ shareAccess.denyRead('items', function(docId, doc, session, origin){
   // But only if the reader is owner of the doc
   return doc.ownerId !== session.userId;
 });
-```js
+```
 
 #### Delete
 
@@ -92,6 +92,7 @@ shareAccess.denyDelete('items', function(docId, doc, session, origin){
 
 #### Update
 
+```js
 // docId - id of your doc for access-control
 // oldDoc  - document object (before update)
 // newDoc  - document object (after update)
@@ -100,7 +101,6 @@ shareAccess.denyDelete('items', function(docId, doc, session, origin){
 // session - your connect session
 // origin - 'server' or 'browser'
 
-```js
 shareAccess.allowUpdate('items', function(docId, oldDoc, newDoc, path, session, origin){
   return true;
 });
