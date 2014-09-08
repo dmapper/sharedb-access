@@ -40,7 +40,6 @@ nothing at all (`undefined`).
 // docId - id of your doc for access-control
 // doc   - document object
 // session - your connect session
-// origin - 'server' or 'browser'
 
 shareAccess.allowCreate('items', function(docId, doc, session){
   return true;
@@ -98,7 +97,6 @@ shareAccess.denyDelete('items', function(docId, doc, session){
 // path    - array of update path segments - f.e = ['name'] if we are 
 //           changing doc.name
 // session - your connect session
-// origin - 'server' or 'browser'
 
 shareAccess.allowUpdate('items', allowUpdateAll);
 
