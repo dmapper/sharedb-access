@@ -42,19 +42,19 @@ nothing at all (`undefined`).
 // session - your connect session
 // origin - 'server' or 'browser'
 
-shareAccess.allowCreate('items', function(docId, doc, session, origin){
+shareAccess.allowCreate('items', function(docId, doc, session){
   return true;
 });
 
 // Deny creation if user is not admin
-shareAccess.denyCreate('items', function(docId, doc, session, origin){
+shareAccess.denyCreate('items', function(docId, doc, session){
   return !session.isAdmin;
 });
 
 // So, finally, only admins can create docs in 'items' collection
 // the same results is if you just write:
 
-shareAccess.allowCreate('items', function(docId, doc, session, origin){
+shareAccess.allowCreate('items', function(docId, doc, session){
   return session.isAdmin;
 });
 ```
@@ -62,12 +62,12 @@ shareAccess.allowCreate('items', function(docId, doc, session, origin){
 
 Interface is like `create`-operation
 ```js
-shareAccess.allowRead('items', function(docId, doc, session, origin){
+shareAccess.allowRead('items', function(docId, doc, session){
   // Allow all operations
   return true;
 });
 
-shareAccess.denyRead('items', function(docId, doc, session, origin){
+shareAccess.denyRead('items', function(docId, doc, session){
   // But only if the reader is owner of the doc
   return doc.ownerId !== session.userId;
 });
@@ -78,12 +78,12 @@ shareAccess.denyRead('items', function(docId, doc, session, origin){
 Interface is like `create`-operation
 
 ```js
-shareAccess.allowDelete('items', function(docId, doc, session, origin){
+shareAccess.allowDelete('items', function(docId, doc, session){
   // Only owners can delete docs
   return doc.ownerId == session.userId;
 });
 
-shareAccess.denyDelete('items', function(docId, doc, session, origin){
+shareAccess.denyDelete('items', function(docId, doc, session){
   // But deny deletion if it's a special type of docs
   return doc.type === 'liveForever';
 });
@@ -102,13 +102,13 @@ shareAccess.denyDelete('items', function(docId, doc, session, origin){
 
 shareAccess.allowUpdate('items', allowUpdateAll);
 
-function allowUpdateAll(docId, oldDoc, newDoc, path, session, origin){
+function allowUpdateAll(docId, oldDoc, newDoc, path, session){
   return true;
 }
 
 shareAccess.denyUpdate('items', denyForNonAdmin);
 
-function denyForNonAdmin(docId, oldDoc, newDoc, path, session, origin){
+function denyForNonAdmin(docId, oldDoc, newDoc, path, session){
   // If you are not an admin you can change only 'description'
   return !session.isAdmin && path[0] !== 'description';
 }

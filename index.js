@@ -43,10 +43,13 @@ operations.forEach(function(op){
 function submitHandler(shareRequest, done) {
   var opData = shareRequest.opData;
 
-//  console.log('submit', opData);
+  var session = shareRequest.agent.connectSession;
 
-  opData.origin     = getOrigin(shareRequest.agent);
-  opData.session    = shareRequest.agent.connectSession;
+  // Only derby-app requests have
+  // connectSession
+  if (!session) return done();
+
+  opData.session    = session;
   opData.collection = shareRequest.collection;
   opData.docId      = shareRequest.docName;
 
@@ -66,13 +69,12 @@ function preValidate(opData, snapshot){
   var session = opData.session;
   var collection = opData.collection;
   var docId = opData.docId;
-  var origin = opData.origin;
 
   // ++++++++++++++++++++++++++++++++ CREATE ++++++++++++++++++++++++++++++++++
   if (opData.create){
     var doc = opData.create.data;
 
-    var ok = check('Create', collection, [docId, doc, session, origin]);
+    var ok = check('Create', collection, [docId, doc, session]);
 
     if (ok) return;
 
@@ -83,7 +85,7 @@ function preValidate(opData, snapshot){
   if (opData.del) {
     var doc = snapshot.data;
 
-    var ok = check('Delete', collection, [docId, doc, session, origin]);
+    var ok = check('Delete', collection, [docId, doc, session]);
 
     if (ok) return;
 
@@ -109,7 +111,7 @@ function validate(opData, snapshot){
 
   console.log('validate - Update:', opData.oldDoc, newDoc, path);
 
-  var ok = check('Update', opData.collection, [opData.docId, opData.oldDoc, newDoc, path, opData.session, opData.origin]);
+  var ok = check('Update', opData.collection, [opData.docId, opData.oldDoc, newDoc, path, opData.session]);
 
   if (ok) return;
 
@@ -119,10 +121,9 @@ function validate(opData, snapshot){
 
 function filterDocs(agent, collection, docId, doc, next){
   // ++++++++++++++++++++++++++++++++ READ ++++++++++++++++++++++++++++++++++
-  var origin = getOrigin(agent);
   var session = agent.connectSession;
 
-  var ok = check('Read', collection, [docId, doc, session, origin]);
+  var ok = check('Read', collection, [docId, doc, session]);
 
   if (ok) return next();
 
@@ -154,6 +155,3 @@ function check(operation, collection, args){
 }
 
 
-function getOrigin(agent){
-  return (agent.stream.isServer) ? 'server' : 'browser';
-}
