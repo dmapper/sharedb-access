@@ -101,14 +101,18 @@ shareAccess.denyDelete('items', function(docId, doc, session, origin){
 // session - your connect session
 // origin - 'server' or 'browser'
 
-shareAccess.allowUpdate('items', function(docId, oldDoc, newDoc, path, session, origin){
-  return true;
-});
+shareAccess.allowUpdate('items', allowUpdateAll);
 
-shareAccess.denyUpdate('items', function(docId, oldDoc, newDoc, path, session, origin){
+function allowUpdateAll(docId, oldDoc, newDoc, path, session, origin){
+  return true;
+}
+
+shareAccess.denyUpdate('items', denyForNonAdmin);
+
+function denyForNonAdmin(docId, oldDoc, newDoc, path, session, origin){
   // If you are not an admin you can change only 'description'
   return !session.isAdmin && path[0] !== 'description';
-});
+}
 ```
 
 ## MIT License
