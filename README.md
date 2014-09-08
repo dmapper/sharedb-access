@@ -21,17 +21,16 @@ derby.use(shareAccess);
 racer.use(shareAccess);
 ```
 
-Using share-access you can control "create", "read", "update", and "delete" 
-database operation for every collections. You can use two types of rules: 
-'allow' and 'deny'. By default all the operations are denied. So, you should
-add some rules to allow them. For example, If at least one 'allow'-rule allows 
-the write, and no 'deny'-rules deny the write, then the write is allowed to 
-proceed. 
+Using `share-access` you can control `create`, `read`, `update`, and `delete` 
+database operation for every collection. You can use two types of rules: 
+`allow` and `deny`. By default all the operations are denied. So, you should
+add some rules to allow them. If at least one `allow`-rule allows the write, and
+no `deny`-rules deny the write, then the write is allowed to proceed. 
 
-You can call 'allow' and 'deny'-rules as many times as you like. The functions 
-should return true if they think the operation should be allowed for 'allow' 
-rules and denied for 'deny'-rules. Otherwise they should return false, or 
-nothing at all (undefined).
+You can call `allow` and `deny`-rules as many times as you like. The functions 
+should return `true` if they think the operation should be allowed for `allow` 
+rules and denied for `deny`-rules. Otherwise they should return `false`, or 
+nothing at all (`undefined`).
 
 #### Create
 
@@ -61,7 +60,7 @@ shareAccess.allowCreate('items', function(docId, doc, session, origin){
 ```
 #### Read
 
-Interface is like 'create'-operation
+Interface is like `create`-operation
 ```js
 shareAccess.allowRead('items', function(docId, doc, session, origin){
   // Allow all operations
@@ -76,7 +75,7 @@ shareAccess.denyRead('items', function(docId, doc, session, origin){
 
 #### Delete
 
-Interface is like 'create'-operation
+Interface is like `create`-operation
 
 ```js
 shareAccess.allowDelete('items', function(docId, doc, session, origin){
