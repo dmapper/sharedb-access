@@ -21,6 +21,7 @@ derby.use(shareAccess);
 racer.use(shareAccess);
 ```
 
+
 Using `share-access` you can control `create`, `read`, `update`, and `delete` 
 database operation for every collection. You can use two types of rules: 
 `allow` and `deny`. By default all the operations are denied. So, you should
