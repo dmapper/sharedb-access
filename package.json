@@ -6,13 +6,22 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/dmapper/share-access.git"
+  },
+  "bugs": "https://github.com/dmapper/share-access/issues",
   "keywords": [
     "sharejs",
     "racerjs",
     "derbyjs",
     "access-control"
   ],
-  "author": "Artur Zayats <zag2art@gmail.com>",
+  "author": {
+    "name": "Artur Zayats",
+    "email": "zag2art@gmail.com",
+    "url": "https://github.com/zag2art"
+  },
   "license": "MIT",
   "dependencies": {
     "lodash": "^2.4.1"
