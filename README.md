@@ -1,7 +1,7 @@
-## share-access
+## sharedb-access
 [![NPM](https://nodei.co/npm/share-access.png?downloads=true)](https://nodei.co/npm/share-access/)
 
-Access-control plugin for [sharejs](https://github.com/share/ShareJS), [racer](https://github.com/derbyjs/racer) and [derby](https://github.com/derbyjs/derby)
+Access-control plugin for [racer](https://github.com/derbyjs/racer) and [derby](https://github.com/derbyjs/derby)
 
 ### Instalation
 
@@ -12,18 +12,12 @@ Access-control plugin for [sharejs](https://github.com/share/ShareJS), [racer](h
 Plug in the middleware:
 
 ```js
-var shareAccess = require('share-access');
-
-// plug in
-shareAccess.setup(shareInstance);
+derby.use(require('sharedb-access'));
 // Or
-derby.use(shareAccess);
-// Or
-racer.use(shareAccess);
+racer.use(require('sharedb-access'));
 ```
 
-
-Using `share-access` you can control `create`, `read`, `update`, and `delete` 
+Using `sharedb-access` you can control `create`, `read`, `update`, and `delete` 
 database operation for every collection. You can use two types of rules: 
 `allow` and `deny`. By default all the operations are denied. So, you should
 add some rules to allow them. If at least one `allow`-rule allows the write, and
@@ -43,19 +37,19 @@ nothing at all (`undefined`).
 // doc   - document object
 // session - your connect session
 
-shareAccess.allowCreate('items', function(docId, doc, session){
+store.allowCreate('items', function(docId, doc, session){
   return true;
 });
 
 // Deny creation if user is not admin
-shareAccess.denyCreate('items', function(docId, doc, session){
+store.denyCreate('items', function(docId, doc, session){
   return !session.isAdmin;
 });
 
 // So, finally, only admins can create docs in 'items' collection
 // the same results is if you just write:
 
-shareAccess.allowCreate('items', function(docId, doc, session){
+store.allowCreate('items', function(docId, doc, session){
   return session.isAdmin;
 });
 ```
@@ -63,12 +57,12 @@ shareAccess.allowCreate('items', function(docId, doc, session){
 
 Interface is like `create`-operation
 ```js
-shareAccess.allowRead('items', function(docId, doc, session){
+store.allowRead('items', function(docId, doc, session){
   // Allow all operations
   return true;
 });
 
-shareAccess.denyRead('items', function(docId, doc, session){
+store.denyRead('items', function(docId, doc, session){
   // But only if the reader is owner of the doc
   return doc.ownerId !== session.userId;
 });
@@ -79,12 +73,12 @@ shareAccess.denyRead('items', function(docId, doc, session){
 Interface is like `create`-operation
 
 ```js
-shareAccess.allowDelete('items', function(docId, doc, session){
+store.allowDelete('items', function(docId, doc, session){
   // Only owners can delete docs
   return doc.ownerId == session.userId;
 });
 
-shareAccess.denyDelete('items', function(docId, doc, session){
+store.denyDelete('items', function(docId, doc, session){
   // But deny deletion if it's a special type of docs
   return doc.type === 'liveForever';
 });
@@ -96,41 +90,14 @@ shareAccess.denyDelete('items', function(docId, doc, session){
 // docId - id of your doc for access-control
 // oldDoc  - document object (before update)
 // newDoc  - document object (after update)
-// path    - array of update path segments - f.e = ['name'] if we are 
-//           changing doc.name
+// ops    - array of OT operations
 // session - your connect session
 
-shareAccess.allowUpdate('items', allowUpdateAll);
+store.allowUpdate('items', allowUpdateAll);
 
-function allowUpdateAll(docId, oldDoc, newDoc, path, session){
+function allowUpdateAll(docId, oldDoc, newDoc, ops, session){
   return true;
-}
-
-shareAccess.denyUpdate('items', denyForNonAdmin);
-
-function denyForNonAdmin(docId, oldDoc, newDoc, path, session){
-  // If you are not an admin you can change only 'description'
-  return !session.isAdmin && path[0] !== 'description';
 }
 ```
 
-## MIT License
-Copyright (c) 2014 by Artur Zayats
-
-Permission is hereby granted, free of charge, to any person obtaining a copy
-of this software and associated documentation files (the "Software"), to deal
-in the Software without restriction, including without limitation the rights
-to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-copies of the Software, and to permit persons to whom the Software is
-furnished to do so, subject to the following conditions:
-
-The above copyright notice and this permission notice shall be included in
-all copies or substantial portions of the Software.
-
-THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
-THE SOFTWARE.
+## MIT License 2015 by Artur Zayats

@@ -1,18 +1,18 @@
 {
-  "name": "share-access",
-  "version": "1.0.0",
-  "description": "Share access-control midleware",
+  "name": "sharedb-access",
+  "version": "0.0.1",
+  "description": "Sharedb access-control midleware",
   "main": "lib/index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
     "type": "git",
-    "url": "git://github.com/dmapper/share-access.git"
+    "url": "git://github.com/dmapper/sharedb-access.git"
   },
-  "bugs": "https://github.com/dmapper/share-access/issues",
+  "bugs": "https://github.com/dmapper/sharedb-access/issues",
   "keywords": [
-    "sharejs",
+    "sharedb",
     "racerjs",
     "derbyjs",
     "access-control"
@@ -24,6 +24,7 @@
   },
   "license": "MIT",
   "dependencies": {
-    "lodash": "^2.4.1"
+    "lodash": "*",
+    "debug": "*"
   }
 }
