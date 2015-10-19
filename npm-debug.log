@@ -1,0 +1,48 @@
+0 info it worked if it ends with ok
+1 verbose cli [ 'node',
+1 verbose cli   '/Users/zag2art/.nvm/versions/node/v0.12.7/bin/npm',
+1 verbose cli   'version',
+1 verbose cli   'major' ]
+2 info using npm@2.7.5
+3 info using node@v0.12.7
+4 info git [ 'status', '--porcelain' ]
+5 verbose version.write data { name: 'sharedb-access',
+5 verbose version.write   version: '1.0.0',
+5 verbose version.write   description: 'Sharedb access-control midleware',
+5 verbose version.write   main: 'lib/index.js',
+5 verbose version.write   scripts: { test: 'echo "Error: no test specified" && exit 1' },
+5 verbose version.write   repository:
+5 verbose version.write    { type: 'git',
+5 verbose version.write      url: 'git://github.com/dmapper/sharedb-access.git' },
+5 verbose version.write   bugs: 'https://github.com/dmapper/sharedb-access/issues',
+5 verbose version.write   keywords: [ 'sharedb', 'racerjs', 'derbyjs', 'access-control' ],
+5 verbose version.write   author:
+5 verbose version.write    { name: 'Artur Zayats',
+5 verbose version.write      email: 'zag2art@gmail.com',
+5 verbose version.write      url: 'https://github.com/zag2art' },
+5 verbose version.write   license: 'MIT',
+5 verbose version.write   dependencies: { lodash: '*', debug: '*' } } to package.json
+6 info git [ 'add', 'package.json' ]
+7 info git [ 'commit', '-m', '1.0.0' ]
+8 info git [ 'tag', 'v1.0.0', '-am', '1.0.0' ]
+9 error git tag v1.0.0 -am 1.0.0
+10 verbose stack Error: Command failed: git tag v1.0.0 -am 1.0.0
+10 verbose stack fatal: tag 'v1.0.0' already exists
+10 verbose stack
+10 verbose stack     at ChildProcess.exithandler (child_process.js:751:12)
+10 verbose stack     at ChildProcess.emit (events.js:110:17)
+10 verbose stack     at maybeClose (child_process.js:1015:16)
+10 verbose stack     at Socket.<anonymous> (child_process.js:1183:11)
+10 verbose stack     at Socket.emit (events.js:107:17)
+10 verbose stack     at Pipe.close (net.js:485:12)
+11 verbose cwd /Users/zag2art/workfiles/sharedb-access
+12 error Darwin 15.0.0
+13 error argv "node" "/Users/zag2art/.nvm/versions/node/v0.12.7/bin/npm" "version" "major"
+14 error node v0.12.7
+15 error npm  v2.7.5
+16 error code 128
+17 error Command failed: git tag v1.0.0 -am 1.0.0
+17 error fatal: tag 'v1.0.0' already exists
+18 error If you need help, you may report this error at:
+18 error     <https://github.com/npm/npm/issues>
+19 verbose exit [ 1, true ]
