@@ -1,5 +1,5 @@
 ## sharedb-access
-[![NPM](https://nodei.co/npm/share-access.png?downloads=true)](https://nodei.co/npm/share-access/)
+[![NPM](https://nodei.co/npm/sharedb-access.png?downloads=true)](https://nodei.co/npm/sharedb-access/)
 
 Access-control plugin for [racer](https://github.com/derbyjs/racer) and [derby](https://github.com/derbyjs/derby)
 
