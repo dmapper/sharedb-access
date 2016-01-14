@@ -7,6 +7,7 @@ Access-control plugin for [racer](https://github.com/derbyjs/racer) and [derby](
 
 - Install: `npm install sharedb-access`
 
+
 ### Usage
 
 Plug in the middleware:
@@ -27,9 +28,6 @@ You can call `allow` and `deny`-rules as many times as you like. The functions
 should return `true` if they think the operation should be allowed for `allow` 
 rules and denied for `deny`-rules. Otherwise they should return `false`, or 
 nothing at all (`undefined`).
-
-#### Note
-Make sure `derby.use` is before the `derby.createStore`
 
 #### Create
 
