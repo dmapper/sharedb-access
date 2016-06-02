@@ -10,12 +10,11 @@ Access-control plugin for [racer](https://github.com/derbyjs/racer) and [derby](
 
 ### Usage
 
-Plug in the middleware:
+Plug in the middleware after you have created a store:
 
 ```js
-derby.use(require('sharedb-access'));
-// Or
-racer.use(require('sharedb-access'));
+var store = derby.createBackend({ ... });
+require("sharedb-access")(store);
 ```
 
 Using `sharedb-access` you can control `create`, `read`, `update`, and `delete` 
