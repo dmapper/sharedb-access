@@ -1,8 +1,6 @@
 ## sharedb-access
 [![NPM](https://nodei.co/npm/sharedb-access.png?downloads=true)](https://nodei.co/npm/sharedb-access/)
 
-Access-control plugin for [racer](https://github.com/derbyjs/racer) and [derby](https://github.com/derbyjs/derby)
-
 ### Installation
 
 - Install: `npm install sharedb-access`
@@ -10,12 +8,9 @@ Access-control plugin for [racer](https://github.com/derbyjs/racer) and [derby](
 
 ### Usage
 
-Plug in the middleware:
-
 ```js
-derby.use(require('sharedb-access'));
-// Or
-racer.use(require('sharedb-access'));
+const shareDbAccess = require('sharedb-access')
+shareDbAccess(backend)
 ```
 
 Using `sharedb-access` you can control `create`, `read`, `update`, and `delete` 
@@ -38,35 +33,36 @@ nothing at all (`undefined`).
 // doc   - document object
 // session - your connect session
 
-store.allowCreate('items', function(docId, doc, session){
-  return true;
-});
+backend.allowCreate('items', async (docId, doc, session) => {
+  return true
+})
 
 // Deny creation if user is not admin
-store.denyCreate('items', function(docId, doc, session){
-  return !session.isAdmin;
-});
+backend.denyCreate('items', async (docId, doc, session) => {
+  return !session.isAdmin
+})
 
 // So, finally, only admins can create docs in 'items' collection
 // the same results is if you just write:
 
-store.allowCreate('items', function(docId, doc, session){
-  return session.isAdmin;
-});
+backend.allowCreate('items', async (docId, doc, session) => {
+  return session.isAdmin
+})
 ```
 #### Read
 
 Interface is like `create`-operation
-```js
-store.allowRead('items', function(docId, doc, session){
-  // Allow all operations
-  return true;
-});
 
-store.denyRead('items', function(docId, doc, session){
+```js
+backend.allowRead('items', async (docId, doc, session) => {
+  // Allow all operations
+  return true
+})
+
+backend.denyRead('items', async (docId, doc, session) => {
   // But only if the reader is owner of the doc
-  return doc.ownerId !== session.userId;
-});
+  return doc.ownerId !== session.userId
+})
 ```
 
 #### Delete
@@ -74,15 +70,15 @@ store.denyRead('items', function(docId, doc, session){
 Interface is like `create`-operation
 
 ```js
-store.allowDelete('items', function(docId, doc, session){
+backend.allowDelete('items', async (docId, doc, session) => {
   // Only owners can delete docs
-  return doc.ownerId == session.userId;
-});
+  return doc.ownerId === session.userId
+})
 
-store.denyDelete('items', function(docId, doc, session){
+backend.denyDelete('items', async (docId, doc, session) => {
   // But deny deletion if it's a special type of docs
-  return doc.type === 'liveForever';
-});
+  return doc.type === 'liveForever'
+})
 ```
 
 #### Update
@@ -94,11 +90,11 @@ store.denyDelete('items', function(docId, doc, session){
 // ops    - array of OT operations
 // session - your connect session
 
-store.allowUpdate('items', allowUpdateAll);
-
-function allowUpdateAll(docId, oldDoc, newDoc, ops, session){
-  return true;
+const allowUpdateAll = async (docId, oldDoc, newDoc, ops, session) => {
+  return true
 }
+
+backend.allowUpdate('items', allowUpdateAll);
 ```
 
-## MIT License 2015 by Artur Zayats
+## MIT License 2017 by Artur Zayats
