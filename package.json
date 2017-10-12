@@ -1,6 +1,6 @@
 {
   "name": "sharedb-access",
-  "version": "4.0.0",
+  "version": "4.0.1",
   "description": "Sharedb access-control midleware",
   "main": "lib/index.js",
   "scripts": {
